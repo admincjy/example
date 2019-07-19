@@ -14,13 +14,13 @@ import java.util.List;
  * @Auther:maybe
  * @create 2019/7/3 16:48
  */
-@FeignClient(value = "microservice-product")
+@FeignClient(value = "microservice-product",fallback = ProductClientServiceFallBack.class)
 public interface FeignService {
 
     @RequestMapping(value = "/product/add",method = RequestMethod.POST)
     boolean add(Product product);
 
-    @RequestMapping(value = "/product/get/",method = RequestMethod.GET)
+    @RequestMapping(value = "/product/get/{id}",method = RequestMethod.GET)
     Product get(@PathVariable("id") Long id);
 
     @RequestMapping(value = "/product/list",method = RequestMethod.GET)
